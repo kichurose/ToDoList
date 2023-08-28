@@ -1,39 +1,46 @@
 <div class="body-container">
-  <div class="header">TODO APP</div>
   <form [formGroup]="form">
+    <div class="header">TO DO LIST</div>
     <div class="todo-wrapper">
       <mat-form-field class="example-full-width">
-        <input
-          formControlName="toDoItem"
-          matInput
-          placeholder="Add to the To-Do List"
-        />
+        <input formControlName="toDoItem" matInput placeholder="Add to List" />
       </mat-form-field>
 
-      <button mat-icon-button color="primary" (click)="addItem(toDoItem)">
+      <button
+        mat-mini-fab
+        style="background-color: #f3fbf0; color: #4d9d27"
+        (click)="addItem(toDoItem)"
+      >
         <mat-icon>add</mat-icon>
       </button>
     </div>
   </form>
-  <div class="renderer">
+  <div class="renderer" *ngIf="toDoArray.length > 0">
     <ng-container *ngFor="let item of toDoArray; let i = index">
       <div class="wrapper">
+        <mat-checkbox></mat-checkbox>
         <!-- <span>{{ item }}</span> -->
-
         <mat-form-field class="example-full-width">
           <input
-            matInput [value]="item" [disabled]="!isEdit || editableIndex!=i "
+            matInput
+            [value]="item"
+            [disabled]="!isEdit || editableIndex != i"
           />
         </mat-form-field>
+
         <!-- <input [class.editClick]=isEdit type="text" value="item"/> -->
 
         <!-- <i class="material-icons" (click)="onEdit()">edit</i> -->
         <!-- <i class="material-icons" (click)="deleteItem(item)">delete</i> -->
-        <button mat-icon-button color="primary" (click)="onEdit(i)">
+        <button
+          mat-mini-fab
+          style="background-color: #f3fbf0; color: #4d9d27"
+          (click)="onEdit(i)"
+        >
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-icon-button color="warn" (click)="deleteItem(item)">
-          <mat-icon>delete</mat-icon>
+        <button mat-mini-fab color="warn" (click)="deleteItem(item)">
+          <mat-icon>remove</mat-icon>
         </button>
       </div>
     </ng-container>
